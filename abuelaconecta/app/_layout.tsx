@@ -14,10 +14,13 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="HomeScreen" />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" /> 
+        <Stack.Screen name="screens/MenuScreen" />
+        <Stack.Screen name="screens/MessageScreen" />
+        <Stack.Screen name="screens/ReminderScreen" />
+        <Stack.Screen name="screens/ViewRemindersScreen" />
         <Stack.Screen name="ProfileScreen" />
-        <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
