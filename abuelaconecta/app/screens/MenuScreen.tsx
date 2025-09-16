@@ -1,5 +1,6 @@
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet,TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
+
 
 export default function MenuScreen() {
   const router = useRouter();
@@ -7,15 +8,21 @@ export default function MenuScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Menú Principal</Text>
-      <Button title="Mensaje" onPress={() => router.push('screens/MessageScreen')} />
-      <Button title="Recordatorio" onPress={() => router.push('screens/ReminderScreen')} />
-      <Button title="Ver Recordatorios" onPress={() => router.push('screens/ViewRemindersScreen')} />
-      <Button title="Volver al Inicio" onPress={() => router.push('/')} />
+   
+      <TouchableOpacity onPress={() => router.push('screens/MessageScreen')}><Text style={styles.button}>Mensaje</Text></TouchableOpacity>
+
+    <TouchableOpacity onPress={() => router.push('screens/ReminderScreen')}><Text style={styles.button}>Recordatorio</Text></TouchableOpacity>
+
+      <TouchableOpacity onPress={() => router.push('screens/ViewRemindersScreen')}><Text style={styles.button}>Ver Recordatorios</Text></TouchableOpacity>
+
+<TouchableOpacity onPress={() => router.push('/')}><Text style={styles.button}>Volver al Inicio</Text></TouchableOpacity>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#1033a3' },
-  title: { fontSize: 24, color: '#fff', marginBottom: 20 },
-});
+  title: { fontSize: 35, color: '#fff', marginBottom: 20 },
+   button: {marginTop: 20 ,  paddingVertical: 20, paddingHorizontal: 40, backgroundColor: "white", color: "black" ,fontSize: 24 }});
+

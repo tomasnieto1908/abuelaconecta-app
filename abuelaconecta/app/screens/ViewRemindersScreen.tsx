@@ -1,23 +1,27 @@
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native"
-import type { StackNavigationProp } from "@react-navigation/stack"
-import type { RootStackParamList } from "./../App"
+"use client"
 
-type ViewRemindersScreenNavigationProp = StackNavigationProp<RootStackParamList, "ViewReminders">
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import { useRouter } from 'expo-router';
 
-interface Props {
-  navigation: ViewRemindersScreenNavigationProp
-}
+export default function ViewRemindersScreen() {
+  const router = useRouter();
+  const reminders = ["*tomar pastilla 17:00", "*tomar pastilla 13:00"];
 
-export default function ViewRemindersScreen({ navigation }: Props) {
-  const reminders = ["*tomar pastilla 17:00", "*tomar pastilla 13:00"]
+  const handleBack = () => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.push('/screens/MenuScreen'); // fallback seguro
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>← atras</Text>
+      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+        <Text style={styles.backButtonText}>← atrás</Text>
       </TouchableOpacity>
 
-      <Text style={styles.title}>ver recordatorio</Text>
+      <Text style={styles.title}>Ver Recordatorios</Text>
 
       <ScrollView style={styles.remindersContainer}>
         {reminders.map((reminder, index) => (
@@ -27,40 +31,14 @@ export default function ViewRemindersScreen({ navigation }: Props) {
         ))}
       </ScrollView>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1033a3",
-    padding: 24,
-  },
-  backButton: {
-    backgroundColor: "#000000",
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 4,
-    alignSelf: "flex-start",
-    marginBottom: 24,
-  },
-  backButtonText: {
-    color: "#ffffff",
-    fontSize: 14,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#ffffff",
-    textAlign: "center",
-    marginBottom: 24,
-  },
-  remindersContainer: {
-    flex: 1,
-  },
-  reminderText: {
-    color: "#ffffff",
-    fontSize: 18,
-    marginBottom: 16,
-  },
-})
+  container: { flex: 1, backgroundColor: "#1033a3", padding: 24 },
+  backButton: { backgroundColor: "#000", paddingHorizontal: 16, paddingVertical: 8, borderRadius: 4, alignSelf: "flex-start", marginBottom: 24 },
+  backButtonText: { color: "#fff", fontSize: 14 },
+  title: { fontSize: 40, fontWeight: "bold", color: "#fff", textAlign: "center", marginBottom: 24 },
+  remindersContainer: { flex: 1 ,},
+  reminderText: { color: "#fff", fontSize: 25, marginBottom: 16 },
+});
